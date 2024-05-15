@@ -1,0 +1,30 @@
+<!doctype html>
+<script src="https://zh.js.cx/test/libs.js"></script>
+<script src="test.js"></script>
+<script>
+
+    async function getUsers(names) {
+        /* your code */
+        let users = []
+
+        //['iliakan', 'remy', 'no.such.users']
+        for (const name of names) {
+            const url = `https://api.github.com/users/${name}`
+            let user = fetch(url).then(
+                res => {
+                    if (res.status === 200) {
+                        return res.json()
+                    }
+                    return null
+                }
+            )
+            users.push(user)
+        }
+        let results = await Promise.all(users)
+        console.log(results);
+        return results
+    }
+
+</script>
+
+</html>
